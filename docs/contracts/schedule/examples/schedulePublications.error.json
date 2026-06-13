@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 403,
+    "reason": "Forbidden",
+    "message": "Only Managers can update schedule publication state.",
+    "status": 403
+  }
+}

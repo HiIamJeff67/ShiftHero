@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 400,
+    "reason": "InvalidShiftRequirement",
+    "message": "endAt must be after startAt and requiredCount must be at least 1.",
+    "status": 400
+  }
+}

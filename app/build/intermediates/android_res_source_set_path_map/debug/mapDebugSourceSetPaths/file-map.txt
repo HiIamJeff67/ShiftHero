@@ -1,0 +1,7 @@
+com.example.shifthero.app-pngs-0 /Users/jeff/StudioProjects/ShiftHero/app/build/generated/res/pngs/debug
+com.example.shifthero.app-updated_navigation_xml-1 /Users/jeff/StudioProjects/ShiftHero/app/build/generated/updated_navigation_xml/debug
+com.example.shifthero.app-packageDebugResources-2 /Users/jeff/StudioProjects/ShiftHero/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.shifthero.app-packageDebugResources-3 /Users/jeff/StudioProjects/ShiftHero/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.shifthero.app-debug-4 /Users/jeff/StudioProjects/ShiftHero/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.example.shifthero.app-debug-5 /Users/jeff/StudioProjects/ShiftHero/app/src/debug/res
+com.example.shifthero.app-main-6 /Users/jeff/StudioProjects/ShiftHero/app/src/main/res

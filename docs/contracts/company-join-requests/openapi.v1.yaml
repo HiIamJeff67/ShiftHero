@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: ShiftHero Company Join Requests API
+  version: 1.0.0
+  description: Feature contract for backend-owned company join request workflow.
+servers:
+  - url: /api/development/v1
+security:
+  - bearerAuth: []
+paths:
+  /companies/joinRequests:
+    post:
+      summary: Create company join request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCompanyJoinRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+  /companies/joinRequests/me:
+    get:
+      summary: List my company join requests
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestListEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+  /companies/{companyId}/joinRequests:
+    get:
+      summary: List join requests for a company
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [Pending, Approved, Rejected, Cancelled]
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestListEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+  /companies/joinRequests/approve:
+    post:
+      summary: Approve company join request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyJoinRequestActionBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+  /companies/joinRequests/reject:
+    post:
+      summary: Reject company join request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyJoinRequestActionBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+  /companies/joinRequests/cancel:
+    post:
+      summary: Cancel my pending company join request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyJoinRequestActionBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/CompanyJoinRequestEnvelope'
+        default:
+          $ref: '#/components/responses/ErrorEnvelope'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    companyId:
+      in: path
+      name: companyId
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+  responses:
+    CompanyJoinRequestEnvelope:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessEnvelopeBase'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CompanyJoinRequest'
+    CompanyJoinRequestListEnvelope:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessEnvelopeBase'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyJoinRequest'
+    ErrorEnvelope:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    UUID:
+      type: string
+      format: uuid
+    SuccessEnvelopeBase:
+      type: object
+      required: [success, data, exception]
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data: {}
+        exception:
+          nullable: true
+          type: object
+    ErrorEnvelope:
+      type: object
+      required: [success, data, exception]
+      properties:
+        success:
+          type: boolean
+          enum: [false]
+        data:
+          nullable: true
+        exception:
+          type: object
+          properties:
+            code: { type: integer }
+            reason: { type: string }
+            prefix: { type: string }
+            message: { type: string }
+            status: { type: integer }
+            details: {}
+            error: {}
+    CompanyJoinRequest:
+      type: object
+      required: [id, companyId, requesterUserId, requestedRole, status, createdAt, updatedAt]
+      properties:
+        id: { $ref: '#/components/schemas/UUID' }
+        companyId: { $ref: '#/components/schemas/UUID' }
+        companyName: { type: string }
+        requesterUserId: { $ref: '#/components/schemas/UUID' }
+        requesterName: { type: string }
+        requesterEmail: { type: string, format: email }
+        requestedRole: { type: string, enum: [Staff, Manager] }
+        note: { type: string }
+        status: { type: string, enum: [Pending, Approved, Rejected, Cancelled] }
+        reviewedByUserId:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+        reviewedAt:
+          nullable: true
+          type: string
+          format: date-time
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    CreateCompanyJoinRequestBody:
+      type: object
+      required: [companyId]
+      properties:
+        companyId: { $ref: '#/components/schemas/UUID' }
+        requestedRole: { type: string, enum: [Staff, Manager], default: Staff }
+        note: { type: string }
+    CompanyJoinRequestActionBody:
+      type: object
+      required: [companyId, joinRequestId]
+      properties:
+        companyId: { $ref: '#/components/schemas/UUID' }
+        joinRequestId: { $ref: '#/components/schemas/UUID' }

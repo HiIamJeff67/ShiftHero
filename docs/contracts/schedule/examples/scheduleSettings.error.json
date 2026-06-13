@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 400,
+    "reason": "InvalidScheduleSettings",
+    "message": "maxWeeklyHours must be greater than zero and timezone must be valid.",
+    "status": 400
+  }
+}

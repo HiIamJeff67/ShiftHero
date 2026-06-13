@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 409,
+    "reason": "AssignmentConflict",
+    "message": "One or more users are assigned to overlapping shifts.",
+    "status": 409
+  }
+}

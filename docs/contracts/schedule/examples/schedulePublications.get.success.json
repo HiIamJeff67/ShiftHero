@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "data": {
+    "companyId": "00000000-0000-0000-0000-000000000001",
+    "weekStart": "2026-06-01",
+    "timezone": "Asia/Taipei",
+    "status": "Draft",
+    "publishedByUserId": null,
+    "publishedAt": null,
+    "updatedAt": "2026-06-05T09:00:00Z",
+    "createdAt": "2026-06-05T09:00:00Z"
+  },
+  "exception": null
+}

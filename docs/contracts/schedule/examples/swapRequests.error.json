@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 409,
+    "reason": "InvalidSwapState",
+    "message": "Only open swap requests can be claimed.",
+    "status": 409
+  }
+}

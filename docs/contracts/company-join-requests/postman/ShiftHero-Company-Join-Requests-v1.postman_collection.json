@@ -1,0 +1,26 @@
+{
+  "info": {
+    "name": "ShiftHero Company Join Requests v1",
+    "description": "Feature contract collection for company join request workflow.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://shift-hero-backend.onrender.com/api/development/v1" },
+    { "key": "token", "value": "" },
+    { "key": "companyId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "joinRequestId", "value": "00000000-0000-0000-0000-000000000101" }
+  ],
+  "item": [
+    {
+      "name": "Company Join Requests",
+      "item": [
+        { "name": "Create Join Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/joinRequests", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"requestedRole\": \"Staff\",\n  \"note\": \"I want to join this company.\"\n}" } } },
+        { "name": "List My Join Requests", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/joinRequests/me" } },
+        { "name": "List Company Join Requests", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/joinRequests?status=Pending" } },
+        { "name": "Approve Join Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/joinRequests/approve", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"joinRequestId\": \"{{joinRequestId}}\"\n}" } } },
+        { "name": "Reject Join Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/joinRequests/reject", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"joinRequestId\": \"{{joinRequestId}}\"\n}" } } },
+        { "name": "Cancel Join Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/joinRequests/cancel", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"joinRequestId\": \"{{joinRequestId}}\"\n}" } } }
+      ]
+    }
+  ]
+}

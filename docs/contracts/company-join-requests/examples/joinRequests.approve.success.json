@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000101",
+    "companyId": "00000000-0000-0000-0000-000000000001",
+    "companyName": "Shift Hero Inc",
+    "requesterUserId": "00000000-0000-0000-0000-000000000201",
+    "requesterName": "jeff123",
+    "requesterEmail": "jeff123@example.com",
+    "requestedRole": "Staff",
+    "note": "I want to join this company.",
+    "status": "Approved",
+    "reviewedByUserId": "00000000-0000-0000-0000-000000000301",
+    "reviewedAt": "2026-06-05T10:05:00Z",
+    "createdAt": "2026-06-05T10:00:00Z",
+    "updatedAt": "2026-06-05T10:05:00Z"
+  },
+  "exception": null
+}

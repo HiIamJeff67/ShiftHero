@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 409,
+    "reason": "DuplicateJoinRequest",
+    "message": "A pending join request already exists for this company.",
+    "status": 409
+  }
+}

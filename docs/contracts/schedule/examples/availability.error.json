@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "data": null,
+  "exception": {
+    "code": 403,
+    "reason": "Forbidden",
+    "message": "Caller must be a company member to submit availability.",
+    "status": 403
+  }
+}

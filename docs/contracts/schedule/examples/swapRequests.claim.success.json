@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000400",
+    "companyId": "00000000-0000-0000-0000-000000000001",
+    "shiftAssignmentId": "00000000-0000-0000-0000-000000000300",
+    "requesterUserId": "00000000-0000-0000-0000-000000000201",
+    "claimedByUserId": "00000000-0000-0000-0000-000000000202",
+    "status": "Claimed",
+    "reason": "Need coverage for an appointment.",
+    "updatedAt": "2026-06-05T10:35:00Z",
+    "createdAt": "2026-06-05T10:30:00Z"
+  },
+  "exception": null
+}

@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "ShiftHero Schedule v1",
+    "description": "Feature contract collection for scheduling, assignments, availability, swaps, schedule publication, and schedule settings.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://shift-hero-backend.onrender.com/api/development/v1" },
+    { "key": "token", "value": "" },
+    { "key": "companyId", "value": "00000000-0000-0000-0000-000000000001" },
+    { "key": "shiftRequirementId", "value": "00000000-0000-0000-0000-000000000100" },
+    { "key": "availabilitySlotId", "value": "00000000-0000-0000-0000-000000000200" },
+    { "key": "shiftAssignmentId", "value": "00000000-0000-0000-0000-000000000300" },
+    { "key": "swapRequestId", "value": "00000000-0000-0000-0000-000000000400" },
+    { "key": "weekStart", "value": "2026-06-01" }
+  ],
+  "item": [
+    {
+      "name": "Shift Requirements",
+      "item": [
+        { "name": "Create Shift Requirement", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/shiftRequirements", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"employeeRole\": \"Staff\",\n  \"startAt\": \"2026-06-01T09:00:00+08:00\",\n  \"endAt\": \"2026-06-01T17:00:00+08:00\",\n  \"requiredCount\": 2,\n  \"note\": \"Lunch rush\"\n}" } } },
+        { "name": "Get Shift Requirements", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/shiftRequirements?startAt=2026-06-01T00:00:00%2B08:00&endAt=2026-06-08T00:00:00%2B08:00" } },
+        { "name": "Update Shift Requirement", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/shiftRequirements", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"shiftRequirementId\": \"{{shiftRequirementId}}\",\n  \"values\": {\n    \"startAt\": \"2026-06-01T10:00:00+08:00\",\n    \"endAt\": \"2026-06-01T18:00:00+08:00\",\n    \"requiredCount\": 3\n  }\n}" } } },
+        { "name": "Delete Shift Requirement", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/shiftRequirements", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"shiftRequirementId\": \"{{shiftRequirementId}}\"\n}" } } }
+      ]
+    },
+    {
+      "name": "Availability",
+      "item": [
+        { "name": "Upsert My Availability", "request": { "method": "PUT", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/availabilitySlots", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"slots\": [\n    { \"startAt\": \"2026-06-01T09:00:00+08:00\", \"endAt\": \"2026-06-01T17:00:00+08:00\", \"isAvailable\": true }\n  ]\n}" } } },
+        { "name": "Get Availability", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/availabilitySlots?startAt=2026-06-01T00:00:00%2B08:00&endAt=2026-06-08T00:00:00%2B08:00" } },
+        { "name": "Delete Availability", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/availabilitySlots", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"availabilitySlotId\": \"{{availabilitySlotId}}\"\n}" } } }
+      ]
+    },
+    {
+      "name": "Assignments",
+      "item": [
+        { "name": "Generate Assignments", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/assignments/generate", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"startAt\": \"2026-06-01T00:00:00+08:00\",\n  \"endAt\": \"2026-06-08T00:00:00+08:00\"\n}" } } },
+        { "name": "Replace Assignments", "request": { "method": "PUT", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/assignments", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"assignments\": [\n    {\n      \"shiftRequirementId\": \"{{shiftRequirementId}}\",\n      \"userId\": \"00000000-0000-0000-0000-000000000201\",\n      \"startAt\": \"2026-06-01T09:00:00+08:00\",\n      \"endAt\": \"2026-06-01T17:00:00+08:00\"\n    }\n  ]\n}" } } },
+        { "name": "Get Assignments", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/assignments?startAt=2026-06-01T00:00:00%2B08:00&endAt=2026-06-08T00:00:00%2B08:00" } }
+      ]
+    },
+    {
+      "name": "Swap Requests",
+      "item": [
+        { "name": "Create Swap Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/swapRequests", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"shiftAssignmentId\": \"{{shiftAssignmentId}}\",\n  \"reason\": \"Need coverage for an appointment.\"\n}" } } },
+        { "name": "Get Swap Requests", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/swapRequests?status=Open" } },
+        { "name": "Claim Swap Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/swapRequests/claim", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"swapRequestId\": \"{{swapRequestId}}\"\n}" } } },
+        { "name": "Approve Swap Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/swapRequests/approve", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"swapRequestId\": \"{{swapRequestId}}\"\n}" } } },
+        { "name": "Cancel Swap Request", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/swapRequests/cancel", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"swapRequestId\": \"{{swapRequestId}}\"\n}" } } }
+      ]
+    },
+    {
+      "name": "Schedule Publication",
+      "item": [
+        { "name": "Get Schedule Publication", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/schedulePublications?weekStart={{weekStart}}&timezone=Asia/Taipei" } },
+        { "name": "Upsert Schedule Publication", "request": { "method": "PUT", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/schedulePublications", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"weekStart\": \"{{weekStart}}\",\n  \"timezone\": \"Asia/Taipei\",\n  \"status\": \"Published\"\n}" } } }
+      ]
+    },
+    {
+      "name": "Schedule Settings",
+      "item": [
+        { "name": "Get Schedule Settings", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/companies/{{companyId}}/scheduleSettings" } },
+        { "name": "Update Schedule Settings", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/companies/scheduleSettings", "body": { "mode": "raw", "raw": "{\n  \"companyId\": \"{{companyId}}\",\n  \"values\": {\n    \"autoApproveSwaps\": false,\n    \"maxWeeklyHours\": 40,\n    \"minRestHours\": 8,\n    \"timezone\": \"Asia/Taipei\"\n  }\n}" } } }
+      ]
+    }
+  ]
+}
